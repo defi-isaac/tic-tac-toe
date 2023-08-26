@@ -47,6 +47,11 @@ table {
 	border-spacing: 0;
 }
 
+@font-face {
+    font-family: "XO";
+    src: url(fonts/Tilt_Prism/TiltPrism-Regular-VariableFont_XROT\,YROT.ttf), url(fonts/Tilt_Prism/static/TiltPrism-Regular.ttf);
+}
+
 body {
     height: 100vh;
     display: flex;
@@ -65,5 +70,10 @@ body {
 
 .gameBoard div {
     border: 2px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 2px;
+    font-family: "XO";
+    font-weight: 500;
 }
