@@ -52,8 +52,7 @@ table {
     src: url(fonts/Tilt_Prism/TiltPrism-Regular-VariableFont_XROT\,YROT.ttf), url(fonts/Tilt_Prism/static/TiltPrism-Regular.ttf);
 }
 
-body {
-    height: 100vh;
+.content {
     display: flex;
     flex-direction: column;
     gap: 3rem;
@@ -62,10 +61,24 @@ body {
     font-size: 4.5rem;
 }
 
+.enterNames {
+    position: relative;
+    top: 1rem;
+    left: 1rem;
+}
+
 .gameBoard {
     display: grid;
     grid-template-columns: repeat(3, 10rem);
     grid-template-rows: repeat(3, 10rem);
+}
+
+.winningSquare {
+    color: rgb(44, 223, 22);
+}
+
+.modal {
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 .gameBoard div {

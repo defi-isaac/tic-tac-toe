@@ -10,24 +10,30 @@ const gameBoard = (() => {
 
 const displayController = (() => {
 
-    const board = gameBoard.board;
+    let board = gameBoard.board;
     const boardBox = document.querySelectorAll('.boardBox'); 
+    const displayResult = document.querySelector('.displayResult');
+    const modal = document.querySelector('.modal');
+    const exitModal = document.querySelector('.exitModal');
     let counter = 0;
 
     for (let i = 0; i < board.length; i++) {
 
         boardBox[i].addEventListener('click', () => {
-                
+
+            /* If the box is empty
+            Check when the button has been clicked, X always goes first then alternate 
+            Depending on when box was clicked, make text content either X or O */    
             if(!boardBox[i].textContent) {
                 if (counter % 2 === 0) {
-                    board[i] = 'X';
+                    boardBox[i].textContent = 'X';
                 } else {
-                    board[i] = 'O';
+                    boardBox[i].textContent = 'O';
                 }
                 counter++;
             }
-
-            boardBox[i].textContent = board[i];
+            // Assign the digital board what's inside the text box
+            gameBoard.board[i] = boardBox[i].textContent;
 
             const leftCol = {
                 top: board[0],
@@ -57,8 +63,71 @@ const displayController = (() => {
                 noWinner: (leftCol.top != '' && leftCol.mid != '' && leftCol.bot != '' && rightCol.top != '' && rightCol.mid != '' && rightCol.bot != '' && midCol.top != '' && midCol.mid != '' && midCol.bot != '')
             }
 
+            if (endScenarios.filledTopRow) {
+                boardBox[0].classList.add('winningSquare');
+                boardBox[1].classList.add('winningSquare');
+                boardBox[2].classList.add('winningSquare');
+                displayResult.textContent = `Whoever played ${board[0]} won the game!`
+                modal.showModal();
+            } else if (endScenarios.filledMidRow) {
+                boardBox[3].classList.add('winningSquare');
+                boardBox[4].classList.add('winningSquare');
+                boardBox[5].classList.add('winningSquare');
+                displayResult.textContent = `Whoever played ${board[3]} won the game!`
+                modal.showModal();
+            } else if (endScenarios.fileldBotRow) {
+                boardBox[6].classList.add('winningSquare');
+                boardBox[7].classList.add('winningSquare');
+                boardBox[8].classList.add('winningSquare');
+                displayResult.textContent = `Whoever played ${board[6]} won the game!`
+                modal.showModal();
+            } else if (endScenarios.filledLeftCol) {
+                boardBox[0].classList.add('winningSquare');
+                boardBox[3].classList.add('winningSquare');
+                boardBox[6].classList.add('winningSquare');
+                displayResult.textContent = `Whoever played ${board[0]} won the game!`
+                modal.showModal();
+            } else if (endScenarios.filledMidCol) {
+                boardBox[1].classList.add('winningSquare');
+                boardBox[4].classList.add('winningSquare');
+                boardBox[7].classList.add('winningSquare');
+                displayResult.textContent = `Whoever played ${board[1]} won the game!`
+                modal.showModal();
+            } else if (endScenarios.filledRightCol) {
+                boardBox[2].classList.add('winningSquare');
+                boardBox[5].classList.add('winningSquare');
+                boardBox[8].classList.add('winningSquare');
+                displayResult.textContent = `Whoever played ${board[2]} won the game!`
+                modal.showModal();
+            } else if (endScenarios.RtoLDiagonal) {
+                boardBox[0].classList.add('winningSquare');
+                boardBox[4].classList.add('winningSquare');
+                boardBox[8].classList.add('winningSquare');
+                displayResult.textContent = `Whoever played ${board[0]} won the game!`
+                modal.showModal();
+            } else if (endScenarios.LtoRDiagonal) {
+                boardBox[6].classList.add('winningSquare');
+                boardBox[4].classList.add('winningSquare');
+                boardBox[2].classList.add('winningSquare');
+                displayResult.textContent = `Whoever played ${board[2]} won the game!`
+                modal.showModal();
+            } else if (endScenarios.noWinner) {
+                displayResult.textContent = 'It was a draw';
+                modal.showModal();
+            }
+
         })
     }
+
+    exitModal.addEventListener('click', () => {
+        modal.close();
+        for (let i = 0; i < board.length; i++) {
+            board[i] = '';
+            boardBox[i].textContent = board[i];
+            boardBox[i].classList.remove('winningSquare');
+        }
+        counter = 0;
+    })
 
 })();
 

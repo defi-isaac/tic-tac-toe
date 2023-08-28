@@ -9,18 +9,34 @@
 </head>
 <body>
 
-    <h1>TIC TAC TOE</h1>
+    <div class="enterNames">
+        <div id="player1">Player 1:</div>
+        <input id="player1" type="text">
+        <div id="player2">Player 2:</div>
+        <input id="player2" type="text">
+    </div>
 
-    <div class="gameBoard">
-        <div class="boardBox"></div>
-        <div class="boardBox"></div>
-        <div class="boardBox"></div>
-        <div class="boardBox"></div>
-        <div class="boardBox"></div>
-        <div class="boardBox"></div>
-        <div class="boardBox"></div>
-        <div class="boardBox"></div>
-        <div class="boardBox"></div>
+    <div class="content">
+
+        <h1>TIC TAC TOE</h1>
+
+        <div class="gameBoard">
+            <div class="boardBox"></div>
+            <div class="boardBox"></div>
+            <div class="boardBox"></div>
+            <div class="boardBox"></div>
+            <div class="boardBox"></div>
+            <div class="boardBox"></div>
+            <div class="boardBox"></div>
+            <div class="boardBox"></div>
+            <div class="boardBox"></div>
+        </div>
+
+        <dialog class="modal">
+            <div class="displayResult"></div>
+            <button class="exitModal">RESTART GAME</button>
+        </dialog>
+
     </div>
     
 </body>
