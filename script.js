@@ -12,7 +12,7 @@ const displayController = (() => {
 
     const board = gameBoard.board;
     const boardBox = document.querySelectorAll('.boardBox'); 
-    const displayWinner = document.querySelector('.displayWinner');
+    const displayResult = document.querySelector('.displayResult');
     const modal = document.querySelector('.modal');
     const exitModal = document.querySelector('.exitModal');
     let counter = 0;
@@ -48,7 +48,7 @@ const displayController = (() => {
                 bot: board[8],
             }
         
-            const winningScenarios = {
+            const endScenarios = {
                 filledRow: ((((leftCol.top === midCol.top) && (leftCol.top === rightCol.top)) && leftCol.top !== '') || 
                             (((leftCol.mid === midCol.mid) && (leftCol.mid === rightCol.mid)) && leftCol.mid !== '') ||
                             (((leftCol.bot === midCol.bot) && (leftCol.bot === rightCol.bot)) && leftCol.bot !== '')),
@@ -56,13 +56,17 @@ const displayController = (() => {
                             (((midCol.top === midCol.mid) && (midCol.top === midCol.bot)) && midCol.top !== '') || 
                             (((rightCol.top === rightCol.mid) && (rightCol.top === rightCol.bot)) && rightCol.top !== '')),
                 filledDiagonal: ((((leftCol.top === midCol.mid) && (leftCol.top === rightCol.bot)) && leftCol.top !== '') || 
-                                 (((rightCol.top === midCol.mid) && (rightCol.top === leftCol.bot)) && rightCol.top !== ''))
+                                 (((rightCol.top === midCol.mid) && (rightCol.top === leftCol.bot)) && rightCol.top !== '')),
+                noWinner: (leftCol.top != '' && leftCol.mid != '' && leftCol.bot != '' && rightCol.top != '' && rightCol.mid != '' && rightCol.bot != '' && midCol.top != '' && midCol.mid != '' && midCol.bot != '')
             }
 
-            if (winningScenarios.filledRow === true || winningScenarios.filledCol === true || winningScenarios.filledDiagonal === true) { 
+            if (endScenarios.filledRow === true || endScenarios.filledCol === true || endScenarios.filledDiagonal === true) { 
                 // Display a modal that displays the who won (X or O)
                 // Modal should have a button that says restart game which clears the gameBoard.board and the board content
-                displayWinner.textContent = 'Somebody won'
+                displayResult.textContent = 'Somebody won'
+                modal.showModal();
+            } else if (endScenarios.noWinner) {
+                displayResult.textContent = 'It was a draw';
                 modal.showModal();
             }
         })
@@ -70,6 +74,10 @@ const displayController = (() => {
 
     exitModal.addEventListener('click', () => {
         modal.close();
+        for (let i = 0; i < board.length; i++) {
+            board[i] = '';
+            boardBox[i].textContent = board[i];
+        }
     })
 
 })();
