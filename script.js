@@ -21,11 +21,8 @@ const displayController = (() => {
     const start = document.querySelector('.start');
     let counter = 0;
 
-    
-    // Initially hide the content div
     content.style.display = 'none';
     
-    // Create a button that will show the content div and hide the current content 
     enterNames.addEventListener('submit', (event) => {
         const players = Players(`${player1.value}`, `${player2.value}`);
         event.preventDefault();
@@ -34,29 +31,11 @@ const displayController = (() => {
         content.style.display = 'flex';
         nameDisplay.textContent = `${player1} (X) and ${player2} (O)`;
     })
-
-    // The current content will be a form entering the player names and a button saying START GAME. Maybe keep the header of 'TIC TAC TOE' and just replace enterNames with .gameBoard
-
-    // Something like:
-
-    // Player 1 (X):
-
-    // Player 2 (O):
-
-    // Add a START NEW GAME button to the content div as well
-
-    // In the Players Function: Read the info using .value() from the form at the start. Add conditional, if board[0] == 'X', displayResult.textContent = `${player1} won the game!`
-
-    // For the displayController, I also want something between header and board that says `${player1} is X, ${player2} is O`
-    
     
     for (let i = 0; i < board.length; i++) {
 
         boardBox[i].addEventListener('click', () => {
-
-            /* If the box is empty
-            Check when the button has been clicked, X always goes first then alternate 
-            Depending on when box was clicked, make text content either X or O */    
+   
             if(!boardBox[i].textContent) {
                 if (counter % 2 === 0) {
                     boardBox[i].textContent = 'X';
@@ -65,7 +44,6 @@ const displayController = (() => {
                 }
                 counter++;
             }
-            // Assign the digital board what's inside the text box
             gameBoard.board[i] = boardBox[i].textContent;
 
             const leftCol = {
