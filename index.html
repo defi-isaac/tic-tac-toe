@@ -9,16 +9,24 @@
 </head>
 <body>
 
-    <div class="enterNames">
-        <div id="player1">Player 1:</div>
-        <input id="player1" type="text">
-        <div id="player2">Player 2:</div>
-        <input id="player2" type="text">
-    </div>
+    <form class="enterNames">
+        <div class="player1">
+            <label for="player1">Player 1 (X):</label>
+            <br>
+            <input name="player2"  id="player1" type="text" placeholder="Enter name" autocomplete="off" required>
+        </div>
+        <div class="player2">
+            <label for="player2">Player 2 (O):</label>
+            <br>
+            <input name="player2" id="player2" type="text" placeholder="Enter name" autocomplete="off" required>
+        </div>
+        <button type="submit" class="start">START TIC TAC TOE GAME</button>
+    </form>
 
     <div class="content">
 
         <h1>TIC TAC TOE</h1>
+        <div class="nameDisplay"></div>
 
         <div class="gameBoard">
             <div class="boardBox"></div>

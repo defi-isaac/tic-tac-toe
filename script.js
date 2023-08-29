@@ -15,8 +15,41 @@ const displayController = (() => {
     const displayResult = document.querySelector('.displayResult');
     const modal = document.querySelector('.modal');
     const exitModal = document.querySelector('.exitModal');
+    const content = document.querySelector('.content');
+    const enterNames = document.querySelector('.enterNames');
+    const nameDisplay = document.querySelector('.nameDisplay');
+    const start = document.querySelector('.start');
     let counter = 0;
 
+    
+    // Initially hide the content div
+    content.style.display = 'none';
+    
+    // Create a button that will show the content div and hide the current content 
+    enterNames.addEventListener('submit', (event) => {
+        const players = Players(`${player1.value}`, `${player2.value}`);
+        event.preventDefault();
+        enterNames.reset();
+        enterNames.style.display = 'none';
+        content.style.display = 'flex';
+        nameDisplay.textContent = `${player1} (X) and ${player2} (O)`;
+    })
+
+    // The current content will be a form entering the player names and a button saying START GAME. Maybe keep the header of 'TIC TAC TOE' and just replace enterNames with .gameBoard
+
+    // Something like:
+
+    // Player 1 (X):
+
+    // Player 2 (O):
+
+    // Add a START NEW GAME button to the content div as well
+
+    // In the Players Function: Read the info using .value() from the form at the start. Add conditional, if board[0] == 'X', displayResult.textContent = `${player1} won the game!`
+
+    // For the displayController, I also want something between header and board that says `${player1} is X, ${player2} is O`
+    
+    
     for (let i = 0; i < board.length; i++) {
 
         boardBox[i].addEventListener('click', () => {
@@ -67,49 +100,81 @@ const displayController = (() => {
                 boardBox[0].classList.add('winningSquare');
                 boardBox[1].classList.add('winningSquare');
                 boardBox[2].classList.add('winningSquare');
-                displayResult.textContent = `Whoever played ${board[0]} won the game!`
+                if (board[0] == 'X') {
+                    displayResult.textContent = `${player1} won the game!`
+                } else {
+                    displayResult.textContent = `${player2} won the game!`
+                }
                 modal.showModal();
             } else if (endScenarios.filledMidRow) {
                 boardBox[3].classList.add('winningSquare');
                 boardBox[4].classList.add('winningSquare');
                 boardBox[5].classList.add('winningSquare');
-                displayResult.textContent = `Whoever played ${board[3]} won the game!`
+                if (board[3] == 'X') {
+                    displayResult.textContent = `${player1} won the game!`
+                } else {
+                    displayResult.textContent = `${player2} won the game!`
+                }
                 modal.showModal();
             } else if (endScenarios.fileldBotRow) {
                 boardBox[6].classList.add('winningSquare');
                 boardBox[7].classList.add('winningSquare');
                 boardBox[8].classList.add('winningSquare');
-                displayResult.textContent = `Whoever played ${board[6]} won the game!`
+                if (board[6] == 'X') {
+                    displayResult.textContent = `${player1} won the game!`
+                } else {
+                    displayResult.textContent = `${player2} won the game!`
+                }
                 modal.showModal();
             } else if (endScenarios.filledLeftCol) {
                 boardBox[0].classList.add('winningSquare');
                 boardBox[3].classList.add('winningSquare');
                 boardBox[6].classList.add('winningSquare');
-                displayResult.textContent = `Whoever played ${board[0]} won the game!`
+                if (board[0] == 'X') {
+                    displayResult.textContent = `${player1} won the game!`
+                } else {
+                    displayResult.textContent = `${player2} won the game!`
+                }
                 modal.showModal();
             } else if (endScenarios.filledMidCol) {
                 boardBox[1].classList.add('winningSquare');
                 boardBox[4].classList.add('winningSquare');
                 boardBox[7].classList.add('winningSquare');
-                displayResult.textContent = `Whoever played ${board[1]} won the game!`
+                if (board[1] == 'X') {
+                    displayResult.textContent = `${player1} won the game!`
+                } else {
+                    displayResult.textContent = `${player2} won the game!`
+                }
                 modal.showModal();
             } else if (endScenarios.filledRightCol) {
                 boardBox[2].classList.add('winningSquare');
                 boardBox[5].classList.add('winningSquare');
                 boardBox[8].classList.add('winningSquare');
-                displayResult.textContent = `Whoever played ${board[2]} won the game!`
+                if (board[2] == 'X') {
+                    displayResult.textContent = `${player1} won the game!`
+                } else {
+                    displayResult.textContent = `${player2} won the game!`
+                }
                 modal.showModal();
             } else if (endScenarios.RtoLDiagonal) {
                 boardBox[0].classList.add('winningSquare');
                 boardBox[4].classList.add('winningSquare');
                 boardBox[8].classList.add('winningSquare');
-                displayResult.textContent = `Whoever played ${board[0]} won the game!`
+                if (board[0] == 'X') {
+                    displayResult.textContent = `${player1} won the game!`
+                } else {
+                    displayResult.textContent = `${player2} won the game!`
+                }
                 modal.showModal();
             } else if (endScenarios.LtoRDiagonal) {
                 boardBox[6].classList.add('winningSquare');
                 boardBox[4].classList.add('winningSquare');
                 boardBox[2].classList.add('winningSquare');
-                displayResult.textContent = `Whoever played ${board[2]} won the game!`
+                if (board[2] == 'X') {
+                    displayResult.textContent = `${player1} won the game!`
+                } else {
+                    displayResult.textContent = `${player2} won the game!`
+                }
                 modal.showModal();
             } else if (endScenarios.noWinner) {
                 displayResult.textContent = 'It was a draw';
@@ -131,6 +196,7 @@ const displayController = (() => {
 
 })();
 
-const Players = () => {
-
+const Players = (player1, player2) => {
+    this.player1 = player1;
+    this.player2 = player2;
 };
